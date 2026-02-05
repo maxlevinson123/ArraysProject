@@ -39,7 +39,7 @@ public class Main {
             String[] cardsArray = cards.split(",");
 
             for (String card : cardsArray) {
-                
+
             }
         }
 
