@@ -61,7 +61,6 @@ public class Main {
             boolean five = false;
             boolean four = false;
             boolean three = false;
-            boolean two = false;
             int pairs = 0;
 
             for (int n : counts) {
@@ -75,7 +74,6 @@ public class Main {
                     three = true;
                 }
                 else if (n == 2) {
-                    two = true;
                     pairs++;
                 }
             }
@@ -86,7 +84,7 @@ public class Main {
             else if (four) {
                 fourOfAKind++;
             }
-            else if (three && two) {
+            else if (three && pairs > 0) {
                 fullHouse++;
             }
             else if (three) {
@@ -103,6 +101,13 @@ public class Main {
             }
         }
 
-        System.out.println(fiveOfAKind + " " + fullHouse + " " + fourOfAKind + " " + threeOfAKind + " " + twoPair + " " + onePair + " " + highCard);
+        System.out.println("Number of five of a kind hands: " + fiveOfAKind);
+        System.out.println("Number of full house hands: " + fullHouse);
+        System.out.println("Number of four of a kind hands: " + fourOfAKind);
+        System.out.println("Number of three of a kind hands: " + threeOfAKind);
+        System.out.println("Number of two pair hands: " + twoPair);
+        System.out.println("Number of one pair hands: " + onePair);
+        System.out.println("Number of high card hands: " + highCard);
+
     }
 }
