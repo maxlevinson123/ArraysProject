@@ -37,9 +37,9 @@ public class Main {
             String cards = hand[0];
             int betAmount = Integer.parseInt(hand[1]);
             String[] cardsArray = cards.split(",");
-            boolean inList = false;
 
             for (String card : cardsArray) {
+                boolean inList = false;
                 for (int i = 0; i < cardTypes.length; i++) {
                     if (card.equals(cardTypes[i])) {
                         counts[i]++;
@@ -51,11 +51,58 @@ public class Main {
                     for (int i = 0; i < cardTypes.length; i++) {
                         if (cardTypes[i].equals("")) {
                             cardTypes[i] = card;
+                            counts[i]++;
+                            break;
                         }
                     }
                 }
             }
 
+            boolean five = false;
+            boolean four = false;
+            boolean three = false;
+            boolean two = false;
+            int pairs = 0;
+
+            for (int n : counts) {
+                if (n == 5) {
+                    five = true;
+                }
+                else if (n == 4) {
+                    four = true;
+                }
+                else if (n == 3) {
+                    three = true;
+                }
+                else if (n == 2) {
+                    two = true;
+                    pairs++;
+                }
+            }
+
+            if (five) {
+                fiveOfAKind++;
+            }
+            else if (four) {
+                fourOfAKind++;
+            }
+            else if (three && two) {
+                fullHouse++;
+            }
+            else if (three) {
+                threeOfAKind++;
+            }
+            else if (pairs == 2) {
+                twoPair++;
+            }
+            else if (pairs == 1) {
+                onePair++;
+            }
+            else {
+                highCard++;
+            }
         }
+
+        System.out.println(fiveOfAKind + " " + fullHouse + " " + fourOfAKind + " " + threeOfAKind + " " + twoPair + " " + onePair + " " + highCard);
     }
 }
