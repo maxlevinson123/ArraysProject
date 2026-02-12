@@ -30,72 +30,28 @@ public class Main {
         int highCard = 0;
 
         for (String line : hands) {
-            String[] cardTypes = {"","","","",""};
-            int[] counts = new int[5];
 
             String[] hand = line.split("\\|");
-            String cards = hand[0];
+            Poker h = new Poker(hand);
+
             int betAmount = Integer.parseInt(hand[1]);
-            String[] cardsArray = cards.split(",");
 
-            for (String card : cardsArray) {
-                boolean inList = false;
-                for (int i = 0; i < cardTypes.length; i++) {
-                    if (card.equals(cardTypes[i])) {
-                        counts[i]++;
-                        inList = true;
-                        break;
-                    }
-                }
-                if (!inList) {
-                    for (int i = 0; i < cardTypes.length; i++) {
-                        if (cardTypes[i].equals("")) {
-                            cardTypes[i] = card;
-                            counts[i]++;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            boolean five = false;
-            boolean four = false;
-            boolean three = false;
-            boolean two = false;
-            int pairs = 0;
-
-            for (int n : counts) {
-                if (n == 5) {
-                    five = true;
-                }
-                else if (n == 4) {
-                    four = true;
-                }
-                else if (n == 3) {
-                    three = true;
-                }
-                else if (n == 2) {
-                    two = true;
-                    pairs++;
-                }
-            }
-
-            if (five) {
+            if (h.handType().equals("fiveOfAKind")) {
                 fiveOfAKind++;
             }
-            else if (four) {
+            else if (h.handType().equals("fourOfAKind")) {
                 fourOfAKind++;
             }
-            else if (three && two) {
+            else if (h.handType().equals("fullHouse")) {
                 fullHouse++;
             }
-            else if (three) {
+            else if (h.handType().equals("threeOfAKind")) {
                 threeOfAKind++;
             }
-            else if (pairs == 2) {
+            else if (h.handType().equals("twoPair")) {
                 twoPair++;
             }
-            else if (pairs == 1) {
+            else if (h.handType().equals("onePair")) {
                 onePair++;
             }
             else {
