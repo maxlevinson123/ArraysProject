@@ -1,9 +1,11 @@
 public class Poker {
 
     private String[] hand;
+    private int numberOfHands;
 
-    public Poker(String[] hand) {
+    public Poker(String[] hand, int numberOfHands) {
         this.hand = hand;
+        this.numberOfHands = numberOfHands;
     }
 
     public String handType(){
@@ -76,7 +78,10 @@ public class Poker {
         }
     }
 
-    public
+
+    public int[] ranks() {
+       String[] handTypes = new String[numberOfHands];
+    }
 
 
 

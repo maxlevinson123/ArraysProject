@@ -32,7 +32,7 @@ public class Main {
         for (String line : hands) {
 
             String[] hand = line.split("\\|");
-            Poker h = new Poker(hand);
+            Poker h = new Poker(hand, hands.length);
 
             int betAmount = Integer.parseInt(hand[1]);
 
