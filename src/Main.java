@@ -1,7 +1,6 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -32,7 +31,8 @@ public class Main {
         for (String line : hands) {
 
             String[] hand = line.split("\\|");
-            Poker h = new Poker(hand, hands.length);
+            String[] cards = hand[0].split(",");
+            Poker h = new Poker(cards);
 
             int betAmount = Integer.parseInt(hand[1]);
 
@@ -59,6 +59,65 @@ public class Main {
             }
         }
 
-        System.out.println(fiveOfAKind + " " + fullHouse + " " + fourOfAKind + " " + threeOfAKind + " " + twoPair + " " + onePair + " " + highCard);
+        System.out.println("Part One:");
+        System.out.println("Number of five of a kind hands: " + fiveOfAKind);
+        System.out.println("Number of full house hands: " + fullHouse);
+        System.out.println("Number of four of a kind hands: " + fourOfAKind);
+        System.out.println("Number of three of a kind hands: " + threeOfAKind);
+        System.out.println("Number of two pair hands: " + twoPair);
+        System.out.println("Number of one pair hands: " + onePair);
+        System.out.println("Number of high card hands: " + highCard);
+
+        System.out.println("*************************************");
+
+            Poker[] pokerHands = new Poker[hands.length];
+            int[] bets = new int[hands.length];
+            int betTotal = 0;
+
+            for (int i = 0; i < hands.length; i++){
+                String[] hand = hands[i].split("\\|");
+                pokerHands[i] = new Poker(hand[0].split(","));
+                bets[i] = Integer.parseInt(hand[1]);
+            }
+
+            for (int i = 0; i < hands.length; i++) {
+                int ranking = 1;
+                for (int n = 0; n < hands.length; n++) {
+                    if (pokerHands[i].handIsStronger(pokerHands[n])) {
+                        ranking++;
+                    }
+                }
+
+                betTotal += ranking * bets[i];
+            }
+
+            System.out.println("Part Two: ");
+            System.out.println("Total bid value: " + betTotal);
+            System.out.println("*************************************");
+
+            Poker[] wildPokerHands = new Poker[hands.length];
+            int[] wildBets = new int[hands.length];
+            int wildBetTotal = 0;
+
+            for (int i = 0; i < hands.length; i++){
+                String[] hand = hands[i].split("\\|");
+                wildPokerHands[i] = new Poker(hand[0].split(","));
+                wildBets[i] = Integer.parseInt(hand[1]);
+            }
+
+            for (int i = 0; i < hands.length; i++) {
+                int ranking = 1;
+                for (int n = 0; n < hands.length; n++) {
+                    if (wildPokerHands[i].handIsStrongerWild(wildPokerHands[n])) {
+                        ranking++;
+                    }
+                }
+
+                wildBetTotal += ranking * wildBets[i];
+            }
+
+            System.out.println("Part Three: ");
+            System.out.println("Total bid value: " + wildBetTotal);
+
+        }
     }
-}
